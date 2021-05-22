@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  background-color: #111;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 50;
+  margin: 1 rem 0 3rem;
+  text-align: center;
+  color: #fff;
+  font-family: "Hind", sans-serif;
+}
+
+.styleToDo {
+  font-weight: 800;
+  color: lime;
+}
+
+.input_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.input_div .input {
+  padding: 0.5rem 1rem;
+  height: 50px;
+  outline: none;
+  background-color: #fff;
+  width: 450px;
+  font-size: 1.15rem;
+  margin: 0.25rem;
+  border: none;
+  border-radius: 25px;
+}
+
+.addButton {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  background-color: lime;
+  color: #fff;
+  margin: 0.25px;
+  cursor: pointer;
+}
+
+.addButton::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: url(./src/image/plus.svg);
+}
+
+.addButton:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.item {
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 4px solid #fff;
+}
+
+.item_input {
+  background: none;
+  outline: none;
+  border: none;
+  color: #fff;
+  width: 350px;
+  font-size: 1.4rem;
+}
+
+.item_input-through {
+  text-decoration: line-through;
+  opacity: 0.3;
+}
+
+.editButton, .removeButton, .doneButton {
+  width: 25px;
+  height: 25px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #111;
+  margin-right: 10px;
+}
+
+.editButton {
+  background-image: url(./src/image/edit.svg);
+}
+
+.removeButton {
+  background-image: url(./src/image/trash.svg);
+  margin-right: 0;
+}
+
+.doneButton {
+  background-image: url(./src/image/done.svg);
+}
+
+.editButton:hover, .removeButton:hover, .doneButton:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+
+
