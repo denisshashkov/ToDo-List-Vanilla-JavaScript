@@ -1,17 +1,12 @@
 const addButton = document.querySelector('.addButton');
 let input = document.querySelector('.input');
-let imageBox = document.querySelector('.image_box');
 const container = document.querySelector('.container');
+const image = document.querySelector('.image_box');
 
 
-class item{
-  constructor(itemName) {
-    this.createDiv(itemName)
-  }
-
-  createDiv(ItemName) {
+function createDiv(itemName) {
     let input = document.createElement('input');
-    input.value = ItemName;
+    input.value = itemName;
     input.disabled = true;
     input.classList.add('item_input');
     input.type = 'text';
@@ -28,6 +23,9 @@ class item{
 
     let removeButton = document.createElement('button');
     removeButton.classList.add('removeButton');
+    
+    
+    image.style.display = 'none';
 
     container.appendChild(itemBox);
 
@@ -37,36 +35,40 @@ class item{
     itemBox.appendChild(removeButton);
 
     doneButton.addEventListener('click', () => {
-      input.classList.add('item_input-through');
+      input.classList.add('completed');
+      itemBox.classList.add('completed');
       editButton.disabled = true;
     });
 
-    editButton.addEventListener('click', () => this.edit(input));
+    editButton.addEventListener('click', () => {
+      input.disabled = !input.disabled;
+    })
 
-    removeButton.addEventListener('click', () => this.remove(itemBox));
+    
 
-  }
-
-  edit(input) {
-    input.disabled = !input.disabled;
-  }
-
-  remove(item) {
-    container.removeChild(item);
-  }
-
+    removeButton.addEventListener('click', () => {
+      itemBox.classList.add('fall');
+      itemBox.addEventListener('transitionend', () => {
+        itemBox.remove();
+        const tasks = container.childNodes;
+        if(!tasks.length) {
+          image.style.display = 'flex';
+        }
+      })
+    
+    });
 }
 
-function check() {
-  if(input.value != '' ) {
-    new item(input.value);
+addButton.addEventListener('click', () => {
+  if(input.value != '') {
+    createDiv(input.value);
     input.value = '';
-  }
-}
+  } 
+})
 
-addButton.addEventListener('click', check);
 window.addEventListener('keydown', (e) => {
   if(e.code == 'Enter') {
-    check();
+    createDiv(input.value);
+    input.value = '';
   }
 })
