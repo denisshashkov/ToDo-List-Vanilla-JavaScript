@@ -6,16 +6,25 @@
 
 body {
   height: 100%;
-  background-color: #111;
+  background-color: #263238;
 }
 
 h1 {
   font-size: 3rem;
   font-weight: 50;
-  margin: 1 rem 0 3rem;
   text-align: center;
   color: #fff;
   font-family: "Hind", sans-serif;
+}
+
+h2 {
+  position: absolute;
+  left: 50%;
+  transform: translatex(-50%);
+  color: #fff;
+  font-family: "Hind", sans-serif;
+  font-weight: 50;
+  bottom: -15%;
 }
 
 .styleToDo {
@@ -28,6 +37,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 3rem;
 }
 
 .input_div .input {
@@ -72,6 +82,15 @@ h1 {
   transition: 0.3s;
 }
 
+.image_box {
+  position: relative;
+  height: 50vh;
+  background-image: url(./src/image/hammock.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -85,6 +104,7 @@ h1 {
   padding: 0.5rem;
   margin-bottom: 1.5rem;
   border-bottom: 4px solid #fff;
+  transition: all .4s ease;
 }
 
 .item_input {
@@ -96,19 +116,26 @@ h1 {
   font-size: 1.4rem;
 }
 
-.item_input-through {
+.completed {
   text-decoration: line-through;
   opacity: 0.3;
 }
 
-.editButton, .removeButton, .doneButton {
+.editButton,
+.removeButton,
+.doneButton {
   width: 25px;
   height: 25px;
   outline: none;
   border: none;
   cursor: pointer;
-  background-color: #111;
   margin-right: 10px;
+  background: transparent;
+}
+
+.fall {
+  transform: translatex(18rem) rotateZ(60deg);
+  opacity: 0;
 }
 
 .editButton {
@@ -124,10 +151,26 @@ h1 {
   background-image: url(./src/image/done.svg);
 }
 
-.editButton:hover, .removeButton:hover, .doneButton:hover {
+.editButton:hover,
+.removeButton:hover,
+.doneButton:hover {
   opacity: 0.7;
   transition: 0.3s;
 }
 
+@media screen and (min-width: 320px) and (max-width: 520px) {
+  .input_div .input {
+    height: 50px;
+    width: 270px;
+    padding: 0.3 rem 0.5 rem;
+  }
 
+  .item {
+    display: flex;
+    align-items: center;
+  }
 
+  .item_input {
+    width: 200px;
+  }
+}
