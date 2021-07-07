@@ -1,78 +1,84 @@
+
 const addButton = document.querySelector('.addButton');
-let input = document.querySelector('.input');
+const input = document.querySelector('.input');
 const container = document.querySelector('.container');
 const image = document.querySelector('.image_box');
 
-function createDiv(itemName) {
-    let input = document.createElement('input');
-    input.value = itemName;
-    input.disabled = true;
-    input.classList.add('item_input');
-    input.type = 'text';
+let localItems = JSON.parse(localStorage.getItem('localItem'));
 
-    let itemBox = document.createElement('div');
-    itemBox.classList.add('item');
-    
-
-    let doneButton = document.createElement('button');
-    doneButton.classList.add('doneButton');
-
-    let editButton = document.createElement('button');
-    editButton.classList.add('editButton');
-
-    let removeButton = document.createElement('button');
-    removeButton.classList.add('removeButton');
-    
-    
-    image.style.display = 'none';
-
-    container.appendChild(itemBox);
-
-    itemBox.appendChild(doneButton);
-    itemBox.appendChild(input);
-    itemBox.appendChild(editButton);
-    itemBox.appendChild(removeButton);
-
-    doneButton.addEventListener('click', () => {
-      input.classList.add('completed');
-      itemBox.classList.add('completed');
-      editButton.disabled = true;
-    });
-
-    editButton.addEventListener('click', () => {
-      input.disabled = !input.disabled;
-    })
-
-    
-
-    removeButton.addEventListener('click', () => {
-      itemBox.classList.add('fall');
-      itemBox.addEventListener('transitionend', () => {
-        itemBox.remove();
-        const tasks = container.childNodes;
-        if(!tasks.length) {
-          image.style.display = 'flex';
-        }
-      })
-    });
+function updateLocalStorage() {
+  localStorage.setItem('localItem', JSON.stringify(taskList));
 }
 
 addButton.addEventListener('click', () => {
   if(input.value != '') {
-    createDiv(input.value);
-    input.value = '';
-  } 
-})
-
-window.addEventListener('keydown', (e) => {
-  if(e.code == 'Enter' && input.value != '') {
-    createDiv(input.value);
-    input.value = '';
+    if(localItems === null) {
+      taskList = [];
+    } else {
+      taskList = localItems;
+    }
+    taskList.push({
+      description: input.value,
+      completed: false
+    });
+    updateLocalStorage();
   }
+  input.value = '';
+   showList();
 })
 
+function showList() {
+  let task = '';
+  let taskListShow = document.querySelector('.container');
+ 
+  if(localItems === null) {
+    taskList = [];
+  } else {
+    taskList = localItems;
+  }
+  taskList.forEach((data,index) => {
+    task += `
+    <div class = 'item'>
+      <button class ='${data.completed ? 'doneButton' : 'notDoneButton'}' onClick = 'doneTask(${index})'></button>
+      <div class='item_value'>
+        <p class ='text ${data.completed ? 'completed' : ''}'>${data.description}</p>
+      </div>
+      <button class = 'removeButton' onClick = 'deleteItem(${index})'></button>
+      </div>`
+     
+  });
+  visibleImage();
+  taskListShow.innerHTML = task;
+ }
+showList();
 
+function doneTask(index) {
+  let text = document.querySelectorAll('.text');
+  
+    taskList[index].completed = !taskList[index].completed;
+    if(taskList[index].completed) {
+      text[index].classList.add('completed'); 
+    } else {
+      text[index].classList.remove('completed');
+    }
+  updateLocalStorage();
+  showList()
+ 
+}
 
+function deleteItem(index) {
+  taskList.splice(index, 1);
+  updateLocalStorage();
+  showList();
+}
+
+function visibleImage() {
+  if(!taskList.length) {
+    image.style.display = 'flex';
+  } else {
+    image.style.display = 'none';
+  }
+}  
 
 
 

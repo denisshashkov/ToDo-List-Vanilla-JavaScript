@@ -101,18 +101,27 @@ h2 {
 }
 
 .item {
+  display: flex;
+  justify-content: space-around;
   padding: 0.5rem;
   margin-bottom: 1.5rem;
   border-bottom: 4px solid #fff;
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 
-.item_input {
+.item_checked {
+  opacity: 0.3;
+}
+
+.item_value {
   background: none;
   outline: none;
   border: none;
-  color: #fff;
   width: 350px;
+}
+
+.text {
+  color: #fff;
   font-size: 1.4rem;
 }
 
@@ -121,9 +130,9 @@ h2 {
   opacity: 0.3;
 }
 
-.editButton,
 .removeButton,
-.doneButton {
+.doneButton,
+.notDoneButton {
   width: 25px;
   height: 25px;
   outline: none;
@@ -133,27 +142,21 @@ h2 {
   background: transparent;
 }
 
-.fall {
-  transform: translatex(18rem) rotateZ(60deg);
-  opacity: 0;
-}
-
-.editButton {
-  background-image: url(./src/image/edit.svg);
-}
-
 .removeButton {
   background-image: url(./src/image/trash.svg);
   margin-right: 0;
+}
+
+.notDoneButton {
+  background-image: url(./src/image/notDone.svg);
 }
 
 .doneButton {
   background-image: url(./src/image/done.svg);
 }
 
-.editButton:hover,
 .removeButton:hover,
-.doneButton:hover {
+.notDoneButton:hover {
   opacity: 0.7;
   transition: 0.3s;
 }
@@ -170,7 +173,7 @@ h2 {
     align-items: center;
   }
 
-  .item_input {
+  .item_value {
     width: 200px;
   }
 }
